@@ -7,25 +7,25 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.edu.ifpb.dac.LauroDac.Controller.FilmeController;
-import br.edu.ifpb.dac.LauroDac.Controller.SessaoController;
-import br.edu.ifpb.dac.LauroDac.model.Filme;
-import br.edu.ifpb.dac.LauroDac.model.Sessao;
-import br.edu.ifpb.dac.LauroDac.util.CreateFilme;
-import br.edu.ifpb.dac.LauroDac.util.CreateSessao;
+import br.edu.ifpb.dac.LauroDac.bussines.service.CreateMovie;
+import br.edu.ifpb.dac.LauroDac.bussines.service.CreateSession;
+import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
+import br.edu.ifpb.dac.LauroDac.model.entity.Session;
+import br.edu.ifpb.dac.LauroDac.presentation.Controller.MovieController;
+import br.edu.ifpb.dac.LauroDac.presentation.Controller.SessionController;
 
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 	
 	@Autowired
-	private FilmeController filmeController;
+	private MovieController filmeController;
 	@Autowired
-	private SessaoController sessaoControler;
+	private SessionController sessaoControler;
 	@Autowired
-	private CreateFilme criarFilme;
+	private CreateMovie criarFilme;
 	@Autowired
-	private CreateSessao criarSessao;
+	private CreateSession criarSessao;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -47,33 +47,33 @@ public class DemoApplication implements CommandLineRunner {
 			
 			if(opcao.equalsIgnoreCase("1")) {	
 			
-			Filme a = criarFilme.criarFilme();	
-			filmeController.SalvarFilme(a);
+			Movie a = criarFilme.createMovie();	
+			filmeController.saveMovie(a);
 			
 			}else if (opcao.equalsIgnoreCase("2")) {
 
-				Sessao s = criarSessao.criarSessao();
-				sessaoControler.salvarSessao(s);
+				Session s = criarSessao.CreateSession();
+				sessaoControler.saveSession(s);
 				
 			
 			}
 			else if(opcao.equalsIgnoreCase("3")) {
 				
-				Filme a = criarFilme.criarFilme();
-				Sessao s = criarSessao.criarSessao();
+				Movie a = criarFilme.createMovie();
+				Session s = criarSessao.CreateSession();
 				a.getSessao().add(s);
 				
-				sessaoControler.salvarSessao(s);
-				filmeController.SalvarFilme(a);
+				sessaoControler.saveSession(s);
+				filmeController.saveMovie(a);
 				
 			}
 			else if(opcao.equalsIgnoreCase("4")) {
 				System.out.println("------------FILMES -----------");
-				for (Filme Filme : filmeController.ListarFilmes()) {
+				for (Movie Filme : filmeController.ListMovies()) {
 					System.out.println(Filme.toString());
 				}
 				System.out.println("------------Sessões -----------");
-				for (Sessao Sessao : sessaoControler.FilmeSessao()) {
+				for (Session Sessao : sessaoControler.ListSession()) {
 					System.out.println(Sessao.toString());
 				}
 			}

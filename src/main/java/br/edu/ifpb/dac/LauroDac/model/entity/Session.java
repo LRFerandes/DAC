@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.LauroDac.model;
+package br.edu.ifpb.dac.LauroDac.model.entity;
 
 import java.util.Objects;
 import java.util.Set;
@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Sessao {
+public class Session {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -49,14 +49,14 @@ public class Sessao {
 	}
 	
 	
-	public Sessao(Integer id, String horário, String data, String local) {
+	public Session(Integer id, String horário, String data, String local) {
 		super();
 		this.id = id;
 		this.Horario = horário;
 		this.data = data;
 		this.local = local;
 	}
-	public Sessao() {
+	public Session() {
 		super();
 	}
 	@Override
@@ -71,7 +71,7 @@ public class Sessao {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Sessao other = (Sessao) obj;
+		Session other = (Session) obj;
 		return Objects.equals(Horario, other.Horario) && Objects.equals(data, other.data)
 				&& Objects.equals(id, other.id) && Objects.equals(local, other.local);
 	}

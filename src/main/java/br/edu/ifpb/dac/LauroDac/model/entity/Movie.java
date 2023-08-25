@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.LauroDac.model;
+package br.edu.ifpb.dac.LauroDac.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Filme {
+public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
@@ -25,7 +25,7 @@ public class Filme {
 	private String Genero ;
 	
 	 @OneToMany
-	private List<Sessao> sessao;
+	private List<Session> sessao;
 	
 	
 	
@@ -48,22 +48,22 @@ public class Filme {
 	public void setGenero(String genero) {
 		Genero = genero;
 	}
-	public List<Sessao> getSessao() {
+	public List<Session> getSessao() {
 		return sessao;
 	}
-	public void setSessao(List<Sessao> sessao) {
+	public void setSessao(List<Session> sessao) {
 		this.sessao = sessao;
 	}
-	public Filme(Integer id, String nome, String genero, List<Sessao> sessao) {
+	public Movie(Integer id, String nome, String genero, List<Session> sessao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.Genero = genero;
 		this.sessao = sessao;
 	}
-	public Filme() {
+	public Movie() {
 		super();
-		this.sessao = new ArrayList<Sessao>();
+		this.sessao = new ArrayList<Session>();
 	}
 	@Override
 	public int hashCode() {
@@ -77,7 +77,7 @@ public class Filme {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Filme other = (Filme) obj;
+		Movie other = (Movie) obj;
 		return Objects.equals(Genero, other.Genero) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(sessao, other.sessao);
 	}

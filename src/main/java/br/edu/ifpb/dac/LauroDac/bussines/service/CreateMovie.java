@@ -1,18 +1,18 @@
-package br.edu.ifpb.dac.LauroDac.util;
+package br.edu.ifpb.dac.LauroDac.bussines.service;
 
 import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
 
-import br.edu.ifpb.dac.LauroDac.model.Filme;
-import br.edu.ifpb.dac.LauroDac.model.Sessao;
+import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
+import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 
 @Component
-public class CreateFilme {
+public class CreateMovie {
 	
-	public Filme criarFilme() {
+	public Movie createMovie() {
 		Scanner sc = new Scanner(System.in);
-		Filme a = new Filme();
+		Movie a = new Movie();
 		System.out.println("nome Do filme");
 		a.setNome(sc.nextLine());
 		System.out.println("Genero");
@@ -21,9 +21,9 @@ public class CreateFilme {
 		return a;
 	}
 	
-	public Filme criarFilme(Sessao sessao) {
+	public Movie createMovie(Session sessao) {
 		Scanner sc = new Scanner(System.in);
-		Filme a = new Filme();
+		Movie a = new Movie();
 		System.out.println("nome Do filme");
 		a.setNome(sc.nextLine());
 		System.out.println("Genero");
