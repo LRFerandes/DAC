@@ -22,7 +22,7 @@ public class Movie {
 	
 	private String nome;
 	
-	private String Genero ;
+	private String genero;
 	
 	 @OneToMany
 	private List<Session> sessao;
@@ -32,9 +32,6 @@ public class Movie {
 	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -43,10 +40,10 @@ public class Movie {
 	}
 
 	public String getGenero() {
-		return Genero;
+		return genero;
 	}
 	public void setGenero(String genero) {
-		Genero = genero;
+		this.genero = genero;
 	}
 	public List<Session> getSessao() {
 		return sessao;
@@ -58,7 +55,7 @@ public class Movie {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.Genero = genero;
+		this.genero = genero;
 		this.sessao = sessao;
 	}
 	public Movie() {
@@ -67,7 +64,7 @@ public class Movie {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(Genero, id, nome, sessao);
+		return Objects.hash(genero, id, nome, sessao);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -78,12 +75,12 @@ public class Movie {
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
-		return Objects.equals(Genero, other.Genero) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
+		return Objects.equals(genero, other.genero) && Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 				&& Objects.equals(sessao, other.sessao);
 	}
 	@Override
 	public String toString() {
-		return "Filme [id=" + id + ", nome=" + nome + ", Genero=" + Genero + "]";
+		return "Filme [id=" + id + ", nome=" + nome + ", Genero=" + genero + "]";
 	}
 	
 	

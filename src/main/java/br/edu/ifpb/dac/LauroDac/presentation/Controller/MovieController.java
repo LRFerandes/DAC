@@ -12,40 +12,44 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.dac.LauroDac.bussines.service.ConverterMovie;
 import br.edu.ifpb.dac.LauroDac.bussines.service.MovieService;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterMovieImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.MovieImp;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.model.repositories.MovieRepository;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.MovieDTO;
 
 @RestController
 public class MovieController {
 	
 	@Autowired
-	private MovieService filmeService;
+	private MovieImp MovieService;
+	@Autowired
+	private ConverterMovieImp createMovie;
 	
 	@PostMapping("/Movie")
-	public void saveMovie(@RequestBody Movie filme) {
-		filmeService.Create(filme);
+	public void saveMovie(@RequestBody MovieDTO movieDTO) {
+		
+		Movie movie = createMovie.ToMovie(movieDTO);
+		MovieService.Create(movie);
 	}
 	
 	@PutMapping("/Movie/{id}")
-	public void ChangeMovieName(@PathVariable Integer id, @RequestBody String Nome) {
-		filmeService.UpdateNome(id, Nome);
+	public void ChangeMovie(@PathVariable("id") Integer id, @RequestBody MovieDTO movieDTO) {
+		MovieService.Update(id, movieDTO);
 	}
 	
 	@DeleteMapping("/Movie/{id}")
 	public void DeleteMovie(@PathVariable("id") Integer id) {
-		filmeService.Delete(id);
+		MovieService.Delete(id);
 	}
 	
 	@GetMapping("/Movie")
 	public List<Movie> ListMovies(){
-		return filmeService.Read();
+		return MovieService.Read();
 	}
 	
-	@PutMapping("/Movie/{id}")
-	public void AddSession(@PathVariable Integer id, @RequestBody Session sessao) {
-		filmeService.AddSession(id, sessao);
-	}
 	
 }

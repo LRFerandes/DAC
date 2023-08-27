@@ -7,17 +7,20 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.MovieImp;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.model.repositories.MovieRepository;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.MovieDTO;
 
 @Service
-public class MovieService {
+public class MovieService implements MovieImp {
 	
 	@Autowired
 	private MovieRepository MovieRepository;
 	
 	public void Create(Movie filme) {
+		
 		MovieRepository.save(filme);
 	}
 	
@@ -30,33 +33,16 @@ public class MovieService {
 		MovieRepository.deleteById(id);
 	}
 	
-	public void UpdateNome(Integer id, String nome) {
+	public void Update(Integer id, MovieDTO movie) {
 		Movie filme = MovieRepository.findById(id).orElse(null);
-		filme.setNome(nome);
+		filme.setNome(movie.getNome());
+		filme.setGenero(movie.getGenero());
+		filme.setSessao(movie.getSessao());
 		MovieRepository.save(filme);
 	}
-	
-	public void UpdateData(Integer id, String Genero) {
-		Movie filme = MovieRepository.findById(id).orElse(null);
-		filme.setGenero(Genero);
-		MovieRepository.save(filme);
-	}
-	
-	public void UpdateSessao(Integer id, List<Session> Sessao) {
-		Movie filme = MovieRepository.findById(id).orElse(null);
-		filme.setSessao(Sessao);
-		MovieRepository.save(filme);
-	}
-	
-	public void AddSession(Integer id, Session sessao) {
-		Movie filme = MovieRepository.findById(id).orElse(null);
-		filme.getSessao().add(sessao);
-		MovieRepository.save(filme);
-	}
-	
-	
-	
-	
+
+
+
 	
 
 }

@@ -13,21 +13,29 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.dac.LauroDac.bussines.service.ConverterSession;
 import br.edu.ifpb.dac.LauroDac.bussines.service.MovieService;
 import br.edu.ifpb.dac.LauroDac.bussines.service.SessionService;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterSessionImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionImp;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 
 @RestController
 public class SessionController {
 	
 	@Autowired
-	private SessionService sessaoService;
+	private SessionImp sessaoService;
+	@Autowired
+	private ConverterSessionImp createSession;
 	
 	
 	@PostMapping("/Session")
-	public void saveSession(@RequestBody Session sessao) {
-		sessaoService.Create(sessao);
+	public void saveSession(@RequestBody SessionDTO SessionDTO) {
+		
+		Session session = createSession.toSession(SessionDTO);	
+		sessaoService.Create(session);
 	}
 	
 	@GetMapping("/Session")
@@ -41,9 +49,11 @@ public class SessionController {
 	}
 	
 	@PutMapping("/Session/{id}")
-	public void changeMovieOnPoster(@PathVariable Integer id, @RequestBody String fime) {
-		sessaoService.UpdateFilme(id, fime);
+	public void changeSession(@PathVariable("id") Integer id, @RequestBody SessionDTO sessionDTO) {
+		Session session = createSession.toSession(sessionDTO);
+		sessaoService.Update(id, session);
 	}
+	
 	
 	
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.model.repositories.SessionRepository;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 
 @Service
 public class SessionService {
@@ -30,21 +31,11 @@ public class SessionService {
 		SessionRepository.deleteById(id);
 	}
 	
-	public void UpdateFilme(Integer id, String horario) {
+	public void Update(Integer id, Session newSession) {
 		Session sessao = SessionRepository.findById(id).orElse(null);
-		sessao.setHorario(horario);
-		SessionRepository.save(sessao);
-	}
-	
-	public void UpdateData(Integer id, String data) {
-		Session sessao = SessionRepository.findById(id).orElse(null);
-		sessao.setData(data);
-		SessionRepository.save(sessao);
-	}
-	
-	public void UpdateLocal(Integer id, String Local) {
-		Session sessao = SessionRepository.findById(id).orElse(null);
-		sessao.setLocal(Local);
+		sessao.setData(newSession.getData());
+		sessao.setHorario(newSession.getHorario());
+		sessao.setLocal(newSession.getLocal());
 		SessionRepository.save(sessao);
 	}
 }
