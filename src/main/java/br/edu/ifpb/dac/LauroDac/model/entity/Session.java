@@ -32,8 +32,8 @@ public class Session {
 	public String getHorario() {
 		return Horario;
 	}
-	public void setHorario(String horário) {
-		Horario = horário;
+	public void setHorario(String horario) {
+		Horario = horario;
 	}
 	public String getData() {
 		return data;

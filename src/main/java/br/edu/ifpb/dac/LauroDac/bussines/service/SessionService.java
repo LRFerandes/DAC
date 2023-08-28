@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionImp;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.model.repositories.SessionRepository;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 
 @Service
-public class SessionService {
+public class SessionService implements SessionImp{
 	
 	@Autowired
 	private SessionRepository SessionRepository;

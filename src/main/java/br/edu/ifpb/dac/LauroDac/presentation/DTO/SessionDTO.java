@@ -16,7 +16,7 @@ public class SessionDTO {
 	}
 
 	public void setHorario(String horario) {
-		horario = horario;
+		this.horario = horario;
 	}
 
 	public String getData() {

@@ -40,7 +40,7 @@ public class MovieDTO{
 	}
 
 	public void setGenero(String genero) {
-		Genero = genero;
+		this.Genero = genero;
 	}
 
 
