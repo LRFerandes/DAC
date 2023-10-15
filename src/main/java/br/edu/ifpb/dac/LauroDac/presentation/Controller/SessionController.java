@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.LauroDac.bussines.service.ConverterSession;
 import br.edu.ifpb.dac.LauroDac.bussines.service.MovieService;
 import br.edu.ifpb.dac.LauroDac.bussines.service.SessionService;
-import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterSessionImp;
-import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterSessionInterface;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionInt;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
@@ -26,32 +26,32 @@ import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 public class SessionController {
 	
 	@Autowired
-	private SessionImp sessaoService;
+	private SessionInt sessaoService;
 	@Autowired
-	private ConverterSessionImp createSession;
+	private ConverterSessionInterface createSession;
 	
 	
 	@PostMapping("/Session")
 	public void saveSession(@RequestBody SessionDTO SessionDTO) {
 		
 		Session session = createSession.toSession(SessionDTO);	
-		sessaoService.Create(session);
+		sessaoService.create(session);
 	}
 	
 	@GetMapping("/Session")
-	public List<Session> ListSession() {
-		return sessaoService.Read();
+	public List<Session> listSession() {
+		return sessaoService.read();
 	}
 	
 	@DeleteMapping("/Session/{id}")
-	public void DeleteSession(@PathVariable("id") Integer id) {
-		sessaoService.Delete(id);
+	public void seleteSession(@PathVariable("id") Integer id) {
+		sessaoService.delete(id);
 	}
 	
 	@PutMapping("/Session/{id}")
 	public void changeSession(@PathVariable("id") Integer id, @RequestBody SessionDTO sessionDTO) {
 		Session session = createSession.toSession(sessionDTO);
-		sessaoService.Update(id, session);
+		sessaoService.update(id, session);
 	}
 	
 	

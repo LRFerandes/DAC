@@ -3,13 +3,14 @@ package br.edu.ifpb.dac.LauroDac.bussines.service;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterSessionImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterSessionInterface;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 
-@Component
-public class ConverterSession implements ConverterSessionImp {
+@Service
+public class ConverterSession implements ConverterSessionInterface {
 	
 	public SessionDTO toSessionDTO(Session session) {
 		SessionDTO sdto = new SessionDTO();

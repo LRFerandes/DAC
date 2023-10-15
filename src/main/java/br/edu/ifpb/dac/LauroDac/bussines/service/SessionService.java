@@ -8,35 +8,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.SessionInt;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.model.repositories.SessionRepository;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.SessionDTO;
 
 @Service
-public class SessionService implements SessionImp{
+public class SessionService implements SessionInt{
 	
 	@Autowired
-	private SessionRepository SessionRepository;
+	private SessionRepository sessionRepository;
 	
-	public void Create(Session sessao) {
-		SessionRepository.save(sessao);
+	public void create(Session sessao) {
+		sessionRepository.save(sessao);
 	}
 	
-	public List<Session> Read() {
-		return SessionRepository.findAll();
+	public List<Session> read() {
+		return sessionRepository.findAll();
 	}
 	
-	public void Delete(Integer id) {
-		SessionRepository.deleteById(id);
+	public void delete(Integer id) {
+		sessionRepository.deleteById(id);
 	}
 	
-	public void Update(Integer id, Session newSession) {
-		Session sessao = SessionRepository.findById(id).orElse(null);
+	public void update(Integer id, Session newSession) {
+		Session sessao = sessionRepository.findById(id).orElse(null);
 		sessao.setData(newSession.getData());
 		sessao.setHorario(newSession.getHorario());
 		sessao.setLocal(newSession.getLocal());
-		SessionRepository.save(sessao);
+		sessionRepository.save(sessao);
 	}
 }

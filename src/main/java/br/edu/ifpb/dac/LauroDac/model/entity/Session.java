@@ -15,7 +15,7 @@ public class Session {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	
-	private String Horario;
+	private String horario;
 	
 	private String data;
 	
@@ -30,10 +30,10 @@ public class Session {
 	}
 	
 	public String getHorario() {
-		return Horario;
+		return horario;
 	}
 	public void setHorario(String horario) {
-		Horario = horario;
+		this.horario = horario;
 	}
 	public String getData() {
 		return data;
@@ -52,7 +52,7 @@ public class Session {
 	public Session(Integer id, String horário, String data, String local) {
 		super();
 		this.id = id;
-		this.Horario = horário;
+		this.horario = horário;
 		this.data = data;
 		this.local = local;
 	}
@@ -61,7 +61,7 @@ public class Session {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(Horario, data, id, local);
+		return Objects.hash(horario, data, id, local);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -72,12 +72,12 @@ public class Session {
 		if (getClass() != obj.getClass())
 			return false;
 		Session other = (Session) obj;
-		return Objects.equals(Horario, other.Horario) && Objects.equals(data, other.data)
+		return Objects.equals(horario, other.horario) && Objects.equals(data, other.data)
 				&& Objects.equals(id, other.id) && Objects.equals(local, other.local);
 	}
 	@Override
 	public String toString() {
-		return "Sessao [id=" + id + ", Horario=" + Horario + ", data=" + data + ", local=" + local + "]";
+		return "Sessao [id=" + id + ", Horario=" + horario + ", data=" + data + ", local=" + local + "]";
 	}
 	
 	

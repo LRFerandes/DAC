@@ -3,17 +3,18 @@ package br.edu.ifpb.dac.LauroDac.bussines.service;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterMovieImp;
+import br.edu.ifpb.dac.LauroDac.bussines.service.interfaces.ConverterMovieInterface;
 import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.model.entity.Session;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.MovieDTO;
 
-@Component
-public class ConverterMovie implements ConverterMovieImp {
+@Service
+public class ConverterMovie implements ConverterMovieInterface {
 	
 	@Override
-	public MovieDTO ToMovieDTO(Movie movie) {
+	public MovieDTO toMovieDTO(Movie movie) {
 		
 		MovieDTO mdto = new MovieDTO();
 		mdto.setGenero(movie.getGenero());
@@ -24,7 +25,7 @@ public class ConverterMovie implements ConverterMovieImp {
 	}
 	
 	@Override
-	public Movie ToMovie(MovieDTO movieDTO) {
+	public Movie toMovie(MovieDTO movieDTO) {
 		Movie m = new Movie();
 		m.setGenero(movieDTO.getGenero());
 		m.setNome(movieDTO.getNome());

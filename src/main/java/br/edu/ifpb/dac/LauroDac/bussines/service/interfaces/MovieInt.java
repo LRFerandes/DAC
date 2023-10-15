@@ -6,11 +6,11 @@ import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.MovieDTO;
 
 
-public interface MovieImp {
+public interface MovieInt {
 	
-	public  void Create(Movie obj);
-	public List<Movie> Read();
-	public void Delete(Integer id);
-	public void Update(Integer id,  MovieDTO obj);
+	public  void create(Movie obj);
+	public List<Movie> read();
+	public void delete(Integer id);
+	public void update(Integer id,  MovieDTO obj);
 	
 }

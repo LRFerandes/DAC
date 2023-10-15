@@ -13,7 +13,7 @@ public class MovieDTO{
 	
 	private String nome;
 	
-	private String Genero;
+	private String genero;
 	
 	private List<Session> sessao;
 
@@ -36,18 +36,18 @@ public class MovieDTO{
 	}
 
 	public String getGenero() {
-		return Genero;
+		return genero;
 	}
 
 	public void setGenero(String genero) {
-		this.Genero = genero;
+		this.genero = genero;
 	}
 
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Genero, nome, sessao);
+		return Objects.hash(genero, nome, sessao);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class MovieDTO{
 		if (getClass() != obj.getClass())
 			return false;
 		MovieDTO other = (MovieDTO) obj;
-		return Objects.equals(Genero, other.Genero) && Objects.equals(nome, other.nome)
+		return Objects.equals(genero, other.genero) && Objects.equals(nome, other.nome)
 				&& Objects.equals(sessao, other.sessao);
 	}
 

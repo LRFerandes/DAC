@@ -3,20 +3,30 @@ package br.edu.ifpb.dac.LauroDac;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import br.edu.ifpb.dac.LauroDac.bussines.service.ConverterMovie;
-import br.edu.ifpb.dac.LauroDac.bussines.service.ConverterSession;
-import br.edu.ifpb.dac.LauroDac.model.entity.Movie;
-import br.edu.ifpb.dac.LauroDac.model.entity.Session;
-import br.edu.ifpb.dac.LauroDac.presentation.Controller.MovieController;
-import br.edu.ifpb.dac.LauroDac.presentation.Controller.SessionController;
+import br.edu.ifpb.dac.LauroDac.model.entity.UserModel;
+import br.edu.ifpb.dac.LauroDac.model.enums.UserRole;
+import br.edu.ifpb.dac.LauroDac.model.repositories.UserRepository;
+
+
+
+
 
 
 @SpringBootApplication
-public class DemoApplication implements CommandLineRunner {
+@EnableWebMvc
+public class DemoApplication implements WebMvcConfigurer {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
 	
 //	@Autowired
 //	private MovieController filmeController;
@@ -28,12 +38,21 @@ public class DemoApplication implements CommandLineRunner {
 //	private ConverterSession criarSessao;
 	
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
+		UserModel user = new UserModel("Lauro", "123", UserRole.ADMIN);
+		System.out.println(user.getId());
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
+//		token.gerarToken(user);
+		System.out.println(encoder.encode(user.getPassword()));
+		SpringApplication.run(DemoApplication.class, args);
+		
+	}
+	
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE");
+	}
+	
+			
 //		Scanner sc = new Scanner(System.in);
 //		
 //		while(true) {
@@ -82,6 +101,6 @@ public class DemoApplication implements CommandLineRunner {
 //			}
 //		}
 //
-	}
+
 
 }
