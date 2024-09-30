@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,11 +17,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.edu.ifpb.dac.LauroDac.bussines.security.TokenService;
-import br.edu.ifpb.dac.LauroDac.model.entity.UserModel;
+import br.edu.ifpb.dac.LauroDac.model.entity.UserLogin;
 import br.edu.ifpb.dac.LauroDac.model.repositories.UserRepository;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.AuthetinticationDto;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.LoginResponseDto;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.RegisterDto;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.TokenDTO;
 
 
 
@@ -47,8 +49,9 @@ public class AuthorizationService implements UserDetailsService{
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        var token = tokenService.generateToken((UserModel) auth.getPrincipal());
+        var token = tokenService.generateToken((UserLogin) auth.getPrincipal());
         return ResponseEntity.ok(new LoginResponseDto(token));
+        
     }
 
 
@@ -56,12 +59,23 @@ public class AuthorizationService implements UserDetailsService{
         if (this.userRepository.findByEmail(registerDto.email()) != null ) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(registerDto.password());
         
-        UserModel newUser = new UserModel(registerDto.email(), encryptedPassword, registerDto.role());
+        UserLogin newUser = new UserLogin(registerDto.email(), encryptedPassword, registerDto.role());
         newUser.setCreatedAt(new Date(System.currentTimeMillis()));
         this.userRepository.save(newUser);
         return ResponseEntity.ok().build();
     }
 
+	public ResponseEntity isTokenValid(@RequestBody TokenDTO dto) {
+		try {
+			String isTokenValid = tokenService.validateToken(dto.getToken());
+			
+			boolean valid = (isTokenValid.equals("")) ? false : true;
+			
+			return new ResponseEntity(valid, HttpStatus.OK);
+		}catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
 
 
     

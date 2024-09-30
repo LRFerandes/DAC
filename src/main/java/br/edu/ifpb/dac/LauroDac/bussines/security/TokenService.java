@@ -11,7 +11,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import br.edu.ifpb.dac.LauroDac.model.entity.UserModel;
+import br.edu.ifpb.dac.LauroDac.model.entity.UserLogin;
 
 
 
@@ -20,7 +20,7 @@ public class TokenService {
 
     private String secret = "Cinema";
 
-    public String generateToken(UserModel userModel){
+    public String generateToken(UserLogin userModel){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
@@ -36,6 +36,7 @@ public class TokenService {
             throw new RuntimeException("ERROR WHILE GENERATING TOKEN", exception);
         }
     }
+    
 
         public String validateToken(String token){
             try {

@@ -21,7 +21,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-public class UserModel implements UserDetails {
+public class UserLogin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id; 
@@ -98,12 +98,12 @@ public class UserModel implements UserDetails {
 
 	
 
-	public UserModel() {
+	public UserLogin() {
 		super();
 	}
 
 
-	public UserModel(String email, String password, UserRole userRole) {
+	public UserLogin(String email, String password, UserRole userRole) {
         this.email = email;
         this.password = password;
         this.userrole = userRole;

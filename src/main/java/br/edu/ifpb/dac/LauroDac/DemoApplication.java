@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import br.edu.ifpb.dac.LauroDac.model.entity.UserModel;
+import br.edu.ifpb.dac.LauroDac.model.entity.UserLogin;
 import br.edu.ifpb.dac.LauroDac.model.enums.UserRole;
 import br.edu.ifpb.dac.LauroDac.model.repositories.UserRepository;
 
@@ -38,18 +38,20 @@ public class DemoApplication implements WebMvcConfigurer {
 //	private ConverterSession criarSessao;
 	
 	public static void main(String[] args) {
-		UserModel user = new UserModel("Lauro", "123", UserRole.ADMIN);
-		System.out.println(user.getId());
+		UserLogin user = new UserLogin("Lauro", "123", UserRole.ADMIN);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 //		token.gerarToken(user);
-		System.out.println(encoder.encode(user.getPassword()));
 		SpringApplication.run(DemoApplication.class, args);
 		
 	}
 	
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE");
+		registry.addMapping("/**")
+	//	.allowedOrigins("http://localhost:3000")
+		.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH");
+		//.allowCredentials(true);
+
 	}
 	
 			

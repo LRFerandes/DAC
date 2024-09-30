@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifpb.dac.LauroDac.bussines.service.AuthorizationService;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.AuthetinticationDto;
 import br.edu.ifpb.dac.LauroDac.presentation.DTO.RegisterDto;
+import br.edu.ifpb.dac.LauroDac.presentation.DTO.TokenDTO;
 
 @RestController
-@RequestMapping("auth")
+//@RequestMapping("auth")
 public class AuthController {
    
     @Autowired
@@ -29,4 +30,10 @@ public class AuthController {
     public ResponseEntity<Object> register (@RequestBody RegisterDto registerDto){
         return authorizationService.register(registerDto);
     }
+    
+    @PostMapping("/isTokenValid")
+	public ResponseEntity isTokenValid(@RequestBody TokenDTO dto) {
+		return authorizationService.isTokenValid(dto);
+	}
+    
 }
