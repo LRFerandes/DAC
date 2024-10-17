@@ -1,2 +1,2 @@
 # LauroDac
- Repositorio criado para disciplina de Desenvolvimento de applicações corporativas
+ CRUD criado em Java para disciplina de Desenvolvimento de applicações corporativas do Curso de Análise e Desenvolvimento de Sistemas. 
